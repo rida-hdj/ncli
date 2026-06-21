@@ -31,7 +31,7 @@ fn main() {
         clean_all();
     }
 }
-// take input as integer
+// take input as boolean
 fn take_input() -> bool {
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
