@@ -1,3 +1,5 @@
+// Copyright © 2026 rida-hdj <https://github.com/rida-hdj>
+
 use owo_colors::OwoColorize;
 use std::{io, process::Command, io::Write};
 
