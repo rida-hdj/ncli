@@ -3,5 +3,9 @@ name = "ncli"
 version = "0.1.0"
 edition = "2024"
 
+[[bin]]
+name = "ncli-linux-x86_64"
+path = "src/main.rs"
+
 [dependencies]
 owo-colors = "4.3.0"
