@@ -1,8 +1,8 @@
 // Copyright © 2026 rida-hdj <https://github.com/rida-hdj>
 
 use owo_colors::OwoColorize;
-use std::{io, process::Command, io::Write};
-
+use std::{io, io::Write};
+mod commands;
 fn main() {
     // ask user about his decide
     // update repos
@@ -22,19 +22,20 @@ fn main() {
     let clean_decide = take_input();
     // execute function depend on user choice
     if repos_decide == true {
-        repos();
+        commands::repos();
     }
 
     if rebuild_decide == true {
-        rebuild();
+        commands::rebuild();
     }
 
     if clean_decide == true {
-        clean_all();
+        commands::clean_all();
     }
 }
+
 // take input as boolean
-fn take_input() -> bool {
+pub fn take_input() -> bool {
     let mut input = String::new();
     io::stdin().read_line(&mut input).unwrap();
 
@@ -45,48 +46,12 @@ fn take_input() -> bool {
         _ => false,
     }
 }
+
 // print status ( done / failed )
-fn print_status(status: std::process::ExitStatus) {
+pub fn print_status(status: std::process::ExitStatus) {
     if status.success() {
         println!("{}", "done".green());
     } else {
         println!("{}", "failed".red());
     }
-}
-// update repos
-fn repos() {
-    let status = Command::new("sudo")
-        .args(["nix", "flake", "update", "--flake", "/etc/nixos/"])
-        .status()
-        .expect("failed to run command");
-    print_status(status);
-}
-// rebuild nixos
-fn rebuild() {
-    let status = Command::new("sudo")
-        .args(["nixos-rebuild", "switch"])
-        .status()
-        .expect("failed to run command");
-    print_status(status);
-}
-// merge two functions
-fn clean_all() {
-    clean();
-    optimise();
-}
-// clean nixos garbage (old generation)
-fn clean() {
-    let status = Command::new("sudo")
-        .args(["nix-collect-garbage", "-d"])
-        .status()
-        .expect("failed to run command");
-    print_status(status);
-}
-// optimise nix store
-fn optimise() {
-    let status = Command::new("nix")
-        .args(["store", "optimise"])
-        .status()
-        .expect("failed to run command");
-    print_status(status);
 }

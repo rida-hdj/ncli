@@ -25,4 +25,4 @@ alias ncli="/path/to/ncli/ncli-linux-x86_64"
 > [!NOTE]
 > This tool requires your system to use flake and the config file/flake in `/etc/nixos/` directory
 
-I will try to fix this in future releases
+I will try to fix this in future
